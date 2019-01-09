@@ -34,7 +34,7 @@ public class HostnameServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>info</title>");
+    out.println("<title>hostname</title>");
     out.println("</head>");
     out.println("<body>");
     

@@ -2,6 +2,10 @@ package com.example;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -34,7 +38,7 @@ public class EnvServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>info</title>");
+    out.println("<title>env</title>");
     out.println("</head>");
     out.println("<body>");
 
@@ -42,10 +46,22 @@ public class EnvServlet extends HttpServlet {
 
     // 環境変数を表示する
     out.println("<h4>Environment Variables</h4>");
-    Map<String, String> envMap = System.getenv();
-    if (envMap != null) {
+    Map<String, String> map = System.getenv();
+    // ソート用のリストを作成
+    List<Map.Entry<String, String>> mapList = new ArrayList<>(map.entrySet());
+    // ソートする
+    Collections.sort(mapList, new Comparator<Map.Entry<String, String>>() {
+      @Override
+      public int compare(Map.Entry<String, String> object1, Map.Entry<String, String> object2) {
+        String key1 = object1.getKey();
+        String key2 = object2.getKey();
+        return key1.compareTo(key2);
+      }
+    });
+    // テーブル表示
+    if (mapList != null) {
       out.println("<table border=1>");
-      for (Map.Entry<String, String> env : envMap.entrySet()) {
+      for (Map.Entry<String, String> env : mapList) {
         out.println("<tr>");
         out.println("<td>" + env.getKey() + "</td>");
         out.println("<td>" + env.getValue() + "</td>");

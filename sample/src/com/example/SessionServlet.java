@@ -57,7 +57,7 @@ public class SessionServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>info</title>");
+    out.println("<title>session</title>");
     out.println("</head>");
     out.println("<body>");
 

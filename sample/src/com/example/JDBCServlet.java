@@ -42,7 +42,7 @@ public class JDBCServlet extends HttpServlet {
     PrintWriter out = response.getWriter();
     out.println("<html>");
     out.println("<head>");
-    out.println("<title>info</title>");
+    out.println("<title>jdbc</title>");
     out.println("</head>");
     out.println("<body>");
 
@@ -51,13 +51,14 @@ public class JDBCServlet extends HttpServlet {
     DataSource dataSource = null;
     Connection conn = null;
 
+    String dataSourceName = System.getenv("DATASOURCE_NAME");
+
     try {
       Context context = new InitialContext();
-      dataSource = (DataSource) context.lookup("jdbc/mydb");
+      dataSource = (DataSource) context.lookup(dataSourceName);
     } catch (NamingException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
-      throw new ServletException(e);
     }
 
     try {
@@ -81,7 +82,6 @@ public class JDBCServlet extends HttpServlet {
     } catch (SQLException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();
-      throw new ServletException(e);
     } finally {
       try {
         if (conn != null)
