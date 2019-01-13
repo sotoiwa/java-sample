@@ -1,4 +1,4 @@
-# sample
+# java-sample
 
 ```shell
 docker build -t sotoiwa540/sample:1.0 .
