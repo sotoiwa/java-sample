@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: liberty
+spec:
+  selector:
+    matchLabels:
+      app: liberty
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: liberty
+    spec:
+      containers:
+      - name: liberty
+        image: sotoiwa540/sample:1.0
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 9080
